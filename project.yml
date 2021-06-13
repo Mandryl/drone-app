@@ -4,6 +4,9 @@ fileGroups:
 configFiles:
   Debug: Configs/Debug.xcconfig
   Release: Configs/Release.xcconfig
+options:
+  postGenCommand: pod install
+  bundleIdPrefix: org.mandryl
 targets:
   ImportSDKDemo:
     type: application
@@ -14,5 +17,3 @@ targets:
       Release: Configs/ImportSDKDemo-Release.xcconfig
     settings:
       CURRENT_PROJECT_VERSION: 1
-    options:
-      postGenCommand: pod install
