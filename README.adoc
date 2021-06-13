@@ -1,0 +1,8 @@
+= Mandryl Drone App
+
+== Getting Started
+
+[source,shell]
+----
+./Hacks/project_init.sh
+----
