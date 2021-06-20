@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "importsdkdemo947b041e": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "S3friendlyName": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+[submodule "aggregate-api-oas"]
+	path = aggregate-api-oas
+	url = git@github.com:Mandryl/aggregate-api-oas.git

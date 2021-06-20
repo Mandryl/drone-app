@@ -7,11 +7,37 @@ configFiles:
 options:
   postGenCommand: pod install
   bundleIdPrefix: org.mandryl
+settings:
+  HEADER_SEARCH_PATHS: 
+    - $(PODS_ROOT)/Headers/Public
 targets:
   ImportSDKDemo:
+    info:
+      path: ImportSDKDemo/Info.plist
+      properties:
+        UISupportedExternalAccessoryProtocols:
+          - com.dji.video
+          - com.dji.protocol
+          - com.dji.common
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        UISupportedInterfaceOrientations: 
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        DJISDKAppKey: 08a70d2fa8ed67fa53c5553c
+        NSLocationAlwaysAndWhenInUseUsageDescription: "Drone location"
+        NSLocationWhenInUseUsageDescription: "Drone location"
+        NSBluetoothAlwaysUsageDescription: "Connect to Drone"
+        UILaunchStoryboardName: LaunchScreen
+        UILaunchScreen:
+          UIImageName: Mandryl
     type: application
     platform: iOS
-    sources: ImportSDKDemo
+    sources: 
+      - ImportSDKDemo
+      - path: ImportSDKDemo/AggregateAPIClient
+      - path: ImportSDKDemo/amplifyconfiguration.json
+      - path: ImportSDKDemo/awsconfiguration.json
     configFiles:
       Debug: Configs/ImportSDKDemo-Debug.xcconfig
       Release: Configs/ImportSDKDemo-Release.xcconfig

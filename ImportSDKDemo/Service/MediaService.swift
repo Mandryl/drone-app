@@ -1,8 +1,8 @@
 //
-//  DJISDKUtil.swift
+//  MediaService.swift
 //  ImportSDKDemo
 //
-//  Created by 仙北谷知将 on 2021/06/13.
+//  Created by 仙北谷知将 on 2021/06/14.
 //
 
 import DJISDK

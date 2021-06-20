@@ -1,20 +1,105 @@
 PODS:
+  - Amplify (1.10.0):
+    - Amplify/Default (= 1.10.0)
+  - Amplify/Default (1.10.0)
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.10.0):
+    - AWSAuthCore (~> 2.24.0)
+    - AWSCognitoIdentityProvider (~> 2.24.0)
+    - AWSCognitoIdentityProviderASF (~> 2.24.0)
+    - AWSCore (~> 2.24.0)
+    - AWSMobileClient (~> 2.24.0)
+    - AWSPluginsCore (= 1.10.0)
+  - AmplifyPlugins/AWSS3StoragePlugin (1.10.0):
+    - AWSCore (~> 2.24.0)
+    - AWSPluginsCore (= 1.10.0)
+    - AWSS3 (~> 2.24.0)
+  - AWSAuthCore (2.24.2):
+    - AWSCore (= 2.24.2)
+  - AWSCognitoIdentityProvider (2.24.2):
+    - AWSCognitoIdentityProviderASF (= 2.24.2)
+    - AWSCore (= 2.24.2)
+  - AWSCognitoIdentityProviderASF (2.24.2)
+  - AWSCore (2.24.2)
+  - AWSMobileClient (2.24.2):
+    - AWSAuthCore (= 2.24.2)
+    - AWSCognitoIdentityProvider (= 2.24.2)
+    - AWSCognitoIdentityProviderASF (= 2.24.2)
+    - AWSCore (= 2.24.2)
+  - AWSPluginsCore (1.10.0):
+    - Amplify (= 1.10.0)
+    - AWSCore (~> 2.24.0)
+  - AWSS3 (2.24.2):
+    - AWSCore (= 2.24.2)
   - DJI-SDK-iOS (4.14)
+  - DJI-UXSDK-iOS (4.14)
+  - DJI-UXSDK-iOS-Beta (0.4.1):
+    - DJI-UXSDK-iOS-Beta-Accessory (= 0.4.1)
+    - DJI-UXSDK-iOS-Beta-Core (= 0.4.1)
+    - DJI-UXSDK-iOS-Beta-Flight (= 0.4.1)
+    - DJI-UXSDK-iOS-Beta-Map (= 0.4.1)
+  - DJI-UXSDK-iOS-Beta-Accessory (0.4.1):
+    - DJI-UXSDK-iOS-Beta-Core (~> 0.4.1)
+  - DJI-UXSDK-iOS-Beta-Core (0.4.1):
+    - DJI-SDK-iOS (~> 4.14)
+    - DJIWidget (~> 1.6.4)
+  - DJI-UXSDK-iOS-Beta-Flight (0.4.1):
+    - DJI-UXSDK-iOS-Beta-Core (~> 0.4.1)
+  - DJI-UXSDK-iOS-Beta-Map (0.4.1):
+    - DJI-UXSDK-iOS-Beta-Core (~> 0.4.1)
   - DJIWidget (1.6.4)
+  - iOS-Color-Picker (1.2)
 
 DEPENDENCIES:
+  - Amplify
+  - AmplifyPlugins/AWSCognitoAuthPlugin
+  - AmplifyPlugins/AWSS3StoragePlugin
   - DJI-SDK-iOS (~> 4.12)
+  - DJI-UXSDK-iOS (~> 4.12)
+  - DJI-UXSDK-iOS-Beta (~> 0.4.1)
   - DJIWidget (~> 1.6.2)
+  - iOS-Color-Picker
 
 SPEC REPOS:
   trunk:
+    - Amplify
+    - AmplifyPlugins
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSPluginsCore
+    - AWSS3
     - DJI-SDK-iOS
+    - DJI-UXSDK-iOS
+    - DJI-UXSDK-iOS-Beta
+    - DJI-UXSDK-iOS-Beta-Accessory
+    - DJI-UXSDK-iOS-Beta-Core
+    - DJI-UXSDK-iOS-Beta-Flight
+    - DJI-UXSDK-iOS-Beta-Map
     - DJIWidget
+    - iOS-Color-Picker
 
 SPEC CHECKSUMS:
+  Amplify: 11e56f4e8ae5abc7a3c2e061c5b99265f81cc93a
+  AmplifyPlugins: ff526ead875caa68c7a6b369f4be332df317bf79
+  AWSAuthCore: d2cb921db598ea03d67284977a3c691e9a1aee83
+  AWSCognitoIdentityProvider: f9d68c563718fa5aa76e077752df06c73810efba
+  AWSCognitoIdentityProviderASF: 21681469334e286df6e5470f3cbab3b10edbf818
+  AWSCore: 08a61ac2b1d98b2d43f59ee40c4bd68e58dfdea3
+  AWSMobileClient: 6af7fff9e58f8d427acf3381cbbae2f0c34d52ab
+  AWSPluginsCore: 744703798503e07230cc64b67b1f7ff0569e06e9
+  AWSS3: 1782d0db43a1219a118ea6263d4ea01f76f8cdf4
   DJI-SDK-iOS: db08fad65cfb9fecddb34b38851af105bd4133db
+  DJI-UXSDK-iOS: 13bcf4ed89db6ea19fd125b1392613153f0c96b9
+  DJI-UXSDK-iOS-Beta: ff005af0d85e651cf88727d379515b673335658a
+  DJI-UXSDK-iOS-Beta-Accessory: 786f7ffd781ade53bb43506b36507f78f5802561
+  DJI-UXSDK-iOS-Beta-Core: 5f59a29692ac3dc6d80265495b66859493023fe2
+  DJI-UXSDK-iOS-Beta-Flight: f185e47dd7c0034fa58907304740a771709b4342
+  DJI-UXSDK-iOS-Beta-Map: 82a816f02456409594b9ab5e6722b36df0b4354a
   DJIWidget: ce26deb9fb78494d2189065f431b13a663181b5f
+  iOS-Color-Picker: 4284a4d744a7cafe9d22d4b66eefc45342b80f1d
 
-PODFILE CHECKSUM: d2417cc953ff4e9f3d73af2bcb92b2231d08c0c4
+PODFILE CHECKSUM: bea3b94de02fc002c13010c2652deba5b695efbf
 
 COCOAPODS: 1.9.1
