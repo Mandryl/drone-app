@@ -17,7 +17,7 @@ struct MediaView: View {
   @ObservedObject var fetcher = MediaFileFetcher()
   
   var region: String
-  @State var selected: MediaFile? = nil
+  @State var selections = Set<MediaFile>()
   @State var needAlert = false
   @State var needProgress = false
   @State var alertMessage = ""
@@ -44,24 +44,58 @@ struct MediaView: View {
     }
   }
   
+  func onSelectAll() {
+    selections.removeAll()
+    fetcher.mediaFileList.forEach {
+      selections.insert($0)
+    }
+  }
+  
+  func onDeselectAll() {
+    selections.removeAll()
+  }
+  
   func onTapSend() {
     needProgress = true
-    if let mediaFile = selected {
-      let publisher = fetcher.downloadAndSendMedia(mediaFile: mediaFile)
+    // if invoke api after uploading images to s3, uncomment below
+    // if let mediaFile = selected {
+    //   let cancellable = fetcher.downloadAndSendMedia(mediaFile: mediaFile)
+    //     .flatMap {
+    //       fetcher.sendMediaFile(data: $0)
+    //     }
+    //     .flatMap {
+    //       fetcher.createIncidents(fileName: $0, region: region)
+    //     }
+    //   sendMediaCancellable = publisher
+    //     .sink {
+    //       if case let .failure(error) = $0 {
+    //         finishSending(error.errorMessage)
+    //       }
+    //     }
+    //     receiveValue: {
+    //       finishSending("Success sending")
+    //     }
+    // if invoke api directly, uncomment below
+    if selections.count != 0 {
+      let mediaFiles = selections
+      let publishers = mediaFiles.map {
+        fetcher.downloadAndSendMedia(mediaFile: $0)
+      }
+      sendMediaCancellable = Publishers.MergeMany(publishers)
+        .collect()
         .flatMap {
-          fetcher.sendMediaFile(data: $0)
+          fetcher.createIncidentsFromRawImages(
+            dataList: $0,
+            region: region
+          )
         }
-        .flatMap {
-          fetcher.createIncidents(fileName: $0, region: region)
-        }
-      sendMediaCancellable = publisher
         .sink {
           if case let .failure(error) = $0 {
             finishSending(error.errorMessage)
           }
         }
-        receiveValue: {
-          finishSending("Success sinding")
+        receiveValue: { dataList in
+          finishSending("Success sending")
         }
     }
   }
@@ -76,7 +110,7 @@ struct MediaView: View {
   var body: some View {
     GeometryReader { geometry in
       VStack {
-        List(fetcher.mediaFileList, id: \.self, selection: $selected) { mediaFile in
+        List(fetcher.mediaFileList, id: \.self, selection: $selections) { mediaFile in
           MediaRow(mediaFile: mediaFile)
         }
       }
@@ -92,6 +126,22 @@ struct MediaView: View {
       ToolbarItem(placement: .navigationBarLeading) {
         Button(action: fetcher.loadMediaList) {
           Image(systemName: "goforward")
+        }
+      }
+      
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Group {
+          if editMode?.wrappedValue == .active {
+            if selections.count == fetcher.mediaFileList.count {
+              Button(action: onDeselectAll) {
+                Text("Deselect")
+              }
+            } else {
+              Button(action: onSelectAll) {
+                Text("Select All")
+              }
+            }
+          }
         }
       }
       

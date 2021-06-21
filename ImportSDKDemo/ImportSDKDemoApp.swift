@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       print("Failed to initialize Amplify with \(error)")
     }
     
+    // TODO: replace production url
+    AggregateAPIClient.basePath = "http://106.161.80.247:8000"
+    
     return true
   }
 }

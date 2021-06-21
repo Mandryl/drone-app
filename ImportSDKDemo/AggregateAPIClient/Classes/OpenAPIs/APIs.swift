@@ -10,7 +10,7 @@ import Foundation
 public typealias AggregateAPIClientAPI = AggregateAPIClient
 
 open class AggregateAPIClient {
-    public static var basePath = "http://localhost:8080"
+    public static var basePath = "http://localhost"
     public static var customHeaders: [String: String] = [:]
     public static var credential: URLCredential?
     public static var requestBuilderFactory: RequestBuilderFactory = URLSessionRequestBuilderFactory()

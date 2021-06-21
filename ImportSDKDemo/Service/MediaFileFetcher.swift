@@ -93,7 +93,7 @@ final class MediaFileFetcher: ObservableObject {
         var progress: Float = 0
         
         guard mediaFile.mediaFile.mediaType == .JPEG else {
-          promise(.failure(.init(errorMessage: "Invalid media type")))
+          promise(.failure(.init(errorMessage: "Invalid media type: \(mediaFile.mediaFile.mediaType)")))
           return
         }
         
@@ -125,6 +125,7 @@ final class MediaFileFetcher: ObservableObject {
     .eraseToAnyPublisher()
   }
   
+  // invoke aggregate api after put object to s3 in iOS app
   func sendMediaFile(data: Data) -> AnyPublisher<String, MediaFetchError> {
     Deferred {
       Future { promise in
@@ -146,6 +147,30 @@ final class MediaFileFetcher: ObservableObject {
       }
     }
     .eraseToAnyPublisher()
+  }
+  
+  func createIncidentsFromRawImages(dataList: [Data], region: String) -> AnyPublisher<Void, MediaFetchError> {
+    Deferred {
+      Future { promise in
+        print("START createIncidents")
+        let base64Images: [String] = dataList.map { $0.base64EncodedString() }
+        self.apiCancellable = IncidentsAPI.createIncidentsRawIncidentsPost(
+          rawIncident: RawIncident(images: base64Images, region: region),
+          apiResponseQueue: DispatchQueue.main
+        )
+        .mapError { MediaFetchError(errorMessage: "API Error: \($0.localizedDescription)") }
+        .sink {
+          if case let .failure(error) = $0 {
+            print("PostRawIncidents failed")
+            promise(.failure(error))
+          }
+        }
+        receiveValue: {
+          print("PostRawIncidents succeeded")
+          promise(.success(Void()))
+        }
+      }
+    }.eraseToAnyPublisher()
   }
   
   func createIncidents(fileName: String, region: String) -> AnyPublisher<Void, MediaFetchError> {

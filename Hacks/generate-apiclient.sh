@@ -4,7 +4,7 @@ cd `dirname $0`
 cd ..
 
 docker run --rm -v "${PWD}:/local" openapitools/openapi-generator-cli generate \
-    -i /local/aggregate-api-oas/oas-aggregate-api.yaml \
+    -i http://gateway.docker.internal:8000/openapi.json \
     -g swift5 \
     -o /local/ImportSDKDemo/ \
     --additional-properties=responseAs=Combine \
